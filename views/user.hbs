@@ -55,7 +55,7 @@
     }
 
     function save () {
-        fetch('/api/v1/{{user.id}}', {
+        fetch('/{{user.id}}', {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json'

@@ -16,6 +16,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+app.use((req, res, next) => {
+    // allow CORS requests
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+    next();
+});
+
 const db_file = process.env.DB || ':memory:';
 const db = new sqlite3.Database(db_file);
 let db_ready = false;
@@ -42,17 +50,17 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-    const query = 'SELECT * FROM users';
+    const query = 'SELECT * FROM Users';
 
-    db.all(query, (err, users = []) => res.render('index', {users}))
+    db.all(query, (err, users = []) => res.json(users))
 });
 
 app.get('/:id', (req, res) => {
-    const query = 'SELECT * FROM users WHERE id = ?';
+    const query = 'SELECT * FROM Users WHERE id = ?';
 
     db.get(query, [req.params.id], (err, user) => {
         if (err) return res.status(404).send('User not found.');
-        res.render('user', {user})
+        res.json(user)
     });
 });
 
