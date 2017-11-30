@@ -4,8 +4,8 @@
   "description": "Egghead - Getting Started with Express",
   "main": "index.js",
   "scripts": {
-    "start": "DB='./db/users.bd' node index.js",
-    "dev": "DB='./db/users.bd' nodemon index.js"
+    "start": "DB='./db/users.db' node index.js",
+    "dev": "DB='./db/users.db' nodemon index.js"
   },
   "keywords": [],
   "author": "Ben Clinkinbeard <ben.clinkinbeard@gmail.com> (http://benclinkinbeard.com/)",
