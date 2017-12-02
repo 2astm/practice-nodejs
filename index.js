@@ -20,6 +20,7 @@ app.use((req, res, next) => {
     // allow CORS requests
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
 
     next();
 });
@@ -50,8 +51,8 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-    const query = 'SELECT * FROM Users';
-
+    let query = 'SELECT * FROM Users';
+    if(req.query.name) query += ` WHERE "name" LIKE \'%${req.query.name}%\'`;
     db.all(query, (err, users = []) => res.json(users))
 });
 
@@ -67,7 +68,6 @@ app.get('/:id', (req, res) => {
 app.put('/:id', (req, res) => {
     const {name, age, address, fruit} = req.body;
     const query = 'UPDATE Users SET name = ?, age = ?, address = ?, fruit = ? WHERE id = ?';
-
     db.run(query, [name, age, address, fruit, req.params.id], (err) => {
         if (err) return res.status(500).send(err);
         res.sendStatus(200)
