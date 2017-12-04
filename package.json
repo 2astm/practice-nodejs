@@ -1,22 +1,25 @@
 {
-  "name": "egghead-getting-started-with-express",
+  "name": "express-start",
   "version": "1.0.0",
-  "description": "Egghead - Getting Started with Express",
+  "description": "Started with Express",
   "main": "index.js",
   "scripts": {
-    "start": "DB='./db/users.db' node index.js",
-    "dev": "DB='./db/users.db' nodemon index.js"
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www"
   },
   "keywords": [],
-  "author": "Ben Clinkinbeard <ben.clinkinbeard@gmail.com> (http://benclinkinbeard.com/)",
+  "author": "Tim miller",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "body-parser": "latest",
     "consolidate": "^0.13.1",
     "express": "^4.13.1",
     "handlebars": "^3.0.3",
-    "jade": "^1.11.0",
     "lodash": "^3.10.0",
+    "jsonwebtoken": "^7.1.9",
+    "sequelize": "^3.23.6",
+    "sequelize-cli": "^3.1.0",
     "sqlite3": "^3.1.13"
   },
   "devDependencies": {
