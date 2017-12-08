@@ -1,12 +1,16 @@
-GET http://localhost:3000/api/v1/
+GET http://localhost:8000/api/v1/
 
 ###
-POST http://localhost:3000/api/v1/users/
+POST http://localhost:8000/api/v1/auth/
 Content-Type: application/json
 
 {
     "name": "Test",
     "password": "pass"
 }
+
+###
+
+GET http://localhost:8000/api/v1/users/1
 
 ###

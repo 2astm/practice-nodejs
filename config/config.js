@@ -1,9 +1,9 @@
 module.exports = {
     secret: 'superSecret',
-    port: 3000,
+    port: 8000,
     development: {
         dialect: "sqlite",
-        storage: "./db.development.sqlite"
+        storage: "./db/db.development.sqlite"
     },
     test: {
         dialect: "sqlite",
