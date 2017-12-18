@@ -13,7 +13,6 @@ module.exports = (sequelize, DataTypes) => {
 
     const model = {
         name: DataTypes.STRING,
-        type: DataTypes.STRING,
         lat: DataTypes.INTEGER,
         lng: DataTypes.INTEGER
     };

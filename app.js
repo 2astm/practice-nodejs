@@ -2,9 +2,13 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
+
 const routes = require('./routes/index');
 const users = require('./routes/users');
 const auth = require('./routes/auth');
+const updateinfo = require('./routes/updateinfo');
+const location = require('./routes/location');
+
 const config = require("./config/config");
 
 app.set('superSecret', config.secret);
@@ -25,6 +29,8 @@ app.use((req, res, next) => {
 app.use('/api/v1', routes);
 app.use('/api/v1/auth', auth);
 app.use('/api/v1/users', users);
+app.use('/api/v1/updateinfo',updateinfo);
+app.use('/api/v1/location',location);
 
 app.use((req, res, next) => {
     let err = new Error('Not Found');

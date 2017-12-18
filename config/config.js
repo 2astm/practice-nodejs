@@ -3,7 +3,7 @@ module.exports = {
     port: 8000,
     development: {
         dialect: "sqlite",
-        storage: "./db/db.development.sqlite"
+        storage: "../db/db.development.sqlite"
     },
     test: {
         dialect: "sqlite",

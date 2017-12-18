@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     const model = {
-        name: DataTypes.STRING,
+        name: {type: DataTypes.STRING,unique:true},
         password: DataTypes.STRING,
         age: DataTypes.INTEGER,
         occupation: DataTypes.STRING
@@ -31,6 +31,9 @@ module.exports = (sequelize, DataTypes) => {
     User.beforeCreate((user) => {
         return bCrypt.hash(user.password, saltRounds).then(hash => user.password = hash);
     });
+    User.beforeBulkUpdate((user)=>{
+        return bCrypt.hash(user.attributes.password,saltRounds).then(hash=>user.attributes.password=hash);
+    })
 
     return User;
 };
