@@ -14,7 +14,8 @@ router.post('/register/', (req, res) => {
             res.json({ // return the information including token as JSON
                 token: jwt.sign({userid}, config.secret, { // create a token
                     expiresIn: "1h" // expires in 24 hours
-                })
+                }),
+                name:user.name
             });
         })
         .catch(err => {
@@ -36,7 +37,8 @@ router.post('/login/', (req, res) => {
                     res.json({ // return the information including token as JSON
                         token: jwt.sign({userid}, config.secret, { // create a token
                             expiresIn: "1h" // expires in 24 hours
-                        })
+                        }),
+                        name: user.name
                     });
 
                 }else{
@@ -47,6 +49,25 @@ router.post('/login/', (req, res) => {
         .catch(err => {
             console.log(err);
             res.status(404).send('User not found.')});
+});
+router.post('/check/',(req,res)=>{
+    jwt.verify(req.body.token,config.secret,(err,decoded)=>{
+        if (err) {
+            res.sendStatus(498);
+        }else{
+            const userid = decoded.userid;
+            console.log(decoded);
+            models.User
+                .findOne({where: {id: userid}})
+                .then(user => res.json({
+                    token: jwt.sign({userid}, config.secret, { // create a token
+                        expiresIn: "1h" // expires in 24 hours
+                    }),
+                    name:user.name
+                }))
+                .catch(err => res.status(404));
+        }
+    })
 });
 
 module.exports = router;

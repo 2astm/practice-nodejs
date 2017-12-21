@@ -49,6 +49,25 @@ router.post('/deletelocation/',(req,res)=>{
                 })
         }
     })
-})
+});
+router.post('/updatelocation/',(req,res)=>{
+    jwt.verify(req.body.token,config.secret,(err,decoded)=>{
+        const {locationid,name} = req.body;
+        if (err) res.sendStatus(498);
+        else{
+            userid = decoded.userid;
+            models.Location
+                .update({name}, {where:{id:locationid, UserId: userid}})
+                .then((location)=>{
+                    res.json({
+                        token: jwt.sign({userid},config.secret,{
+                            expiresIn: "1h"
+                        })
+                    })
+                });
+
+        }
+    })
+});
 
 module.exports = router;
