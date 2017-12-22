@@ -16,10 +16,11 @@
     "consolidate": "^0.13.1",
     "express": "^4.13.1",
     "handlebars": "^3.0.3",
-    "lodash": "^3.10.0",
     "jsonwebtoken": "^7.1.9",
+    "lodash": "^3.10.0",
     "sequelize": "^3.23.6",
     "sequelize-cli": "^3.1.0",
+    "sqlite": "^2.9.0",
     "sqlite3": "^3.1.13"
   },
   "devDependencies": {

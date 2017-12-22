@@ -32,8 +32,11 @@ module.exports = (sequelize, DataTypes) => {
         return bCrypt.hash(user.password, saltRounds).then(hash => user.password = hash);
     });
     User.beforeBulkUpdate((user)=>{
-        return bCrypt.hash(user.attributes.password,saltRounds).then(hash=>user.attributes.password=hash);
-    })
+        console.log(user);
+        if (user.password!= null) {
+            return bCrypt.hash(user.attributes.password, saltRounds).then(hash => user.attributes.password = hash);
+        }
+    });
 
     return User;
 };

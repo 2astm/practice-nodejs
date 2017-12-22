@@ -38,7 +38,8 @@ router.post('/login/', (req, res) => {
                         token: jwt.sign({userid}, config.secret, { // create a token
                             expiresIn: "1h" // expires in 24 hours
                         }),
-                        name: user.name
+                        name: user.name,
+                        id: user.id
                     });
 
                 }else{
@@ -63,7 +64,8 @@ router.post('/check/',(req,res)=>{
                     token: jwt.sign({userid}, config.secret, { // create a token
                         expiresIn: "1h" // expires in 24 hours
                     }),
-                    name:user.name
+                    name:user.name,
+                    id: user.id
                 }))
                 .catch(err => res.status(404));
         }

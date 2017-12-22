@@ -6,6 +6,7 @@ const config = require ('../config/config')
 const app = require('../app');
 
 router.post('/addlocation/', (req, res) => {
+    console.log(req.body);
     jwt.verify(req.body.token,config.secret,(err,decoded)=>{
 
         if (err) res.sendStatus(498)
@@ -68,6 +69,16 @@ router.post('/updatelocation/',(req,res)=>{
 
         }
     })
+});
+router.get('/getlocation/:id',(req,res)=> {
+    id = req.params.id;
+    models.Location
+        .findAll({attributes: ['id','name','lat','lng'], where: {userId: req.params.id}})
+        .then((location)=>{
+            res.json({
+                locations: location
+            })
+        })
 });
 
 module.exports = router;

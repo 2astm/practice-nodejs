@@ -17,5 +17,6 @@ module.exports = (sequelize, DataTypes) => {
         lng: DataTypes.INTEGER
     };
 
+
     return sequelize.define('Location', model, {classMethods});
 };
