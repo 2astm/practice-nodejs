@@ -6,22 +6,23 @@ const config = require ('../config/config')
 const bCrypt = require ('bcrypt')
 
 router.post('/register/', (req, res) => {
-    const {name, password} = req.body;
+    const {name, password, age, occupation} = req.body;
     models.User
-        .create({name, password})
+        .create({name, password, age, occupation})
         .then(user => {
             const userid = user.id;
             res.json({ // return the information including token as JSON
                 token: jwt.sign({userid}, config.secret, { // create a token
                     expiresIn: "1h" // expires in 24 hours
                 }),
-                name:user.name
+                name:user.name,
+                id: user.id
             });
         })
         .catch(err => {
             console.log(err.message);
             if (err.message === "Validation error"){
-                res.sendStatus(409);
+                res.sendStatus(409).send('Validation error');
             }
         });
 });
@@ -67,7 +68,8 @@ router.post('/check/',(req,res)=>{
                     name:user.name,
                     id: user.id
                 }))
-                .catch(err => res.status(404));
+                .catch(err => {
+                    res.status(404).send('User not found');})
         }
     })
 });

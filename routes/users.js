@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/:id', (req, res) => {
     models.User
-        .findOne({where: {id: req.params.id}})
+        .findOne({attributes:['id', 'name', 'age', 'occupation'], where: {id: req.params.id}})
         .then(user => res.json(user))
         .catch(err => res.status(404).send('User not found.'));
 });

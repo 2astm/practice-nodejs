@@ -26,7 +26,7 @@ router.post('/', (req, res) => {
                     })
                     .catch((err) => {
                         console.log(err);
-                        res.sendStatus(409);
+                        res.sendStatus(409).send('Conflict');
                     });
             }else{
                 models.User
@@ -41,7 +41,7 @@ router.post('/', (req, res) => {
                     })
                     .catch((err) => {
                         console.log(err);
-                        res.sendStatus(409);
+                        res.sendStatus(409).send('Conflict');
                     });
             }
         }

@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     models.User
-        .findAll()
+        .findAll({attributes: ['id', 'name', 'age', 'occupation']})
         .then((users = []) => res.json(users))
         .catch(err => console.log(err));
 });
